@@ -145,6 +145,34 @@ resetBtn.addEventListener("click", () => {
     gameInterval = setInterval(initGame, 125);
 });
 
+// Mobile controls
+const upBtn = document.getElementById("up-btn");
+const downBtn = document.getElementById("down-btn");
+const leftBtn = document.getElementById("left-btn");
+const rightBtn = document.getElementById("right-btn");
+
+const mobileDirection = (dir) => {
+    if (!isGameRunning) return;
+    if (dir === "up" && velocityY !== 1) {
+        velocityX = 0;
+        velocityY = -1;
+    } else if (dir === "down" && velocityY !== -1) {
+        velocityX = 0;
+        velocityY = 1;
+    } else if (dir === "left" && velocityX !== 1) {
+        velocityX = -1;
+        velocityY = 0;
+    } else if (dir === "right" && velocityX !== -1) {
+        velocityX = 1;
+        velocityY = 0;
+    }
+};
+
+upBtn.addEventListener("touchstart", () => mobileDirection("up"));
+downBtn.addEventListener("touchstart", () => mobileDirection("down"));
+leftBtn.addEventListener("touchstart", () => mobileDirection("left"));
+rightBtn.addEventListener("touchstart", () => mobileDirection("right"));
+
 // Initial setup
 updateScore();
 resetGame();
